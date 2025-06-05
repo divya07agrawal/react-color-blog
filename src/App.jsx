@@ -37,13 +37,24 @@ function DropdownMenu() {
 function Home() {
   const [color, setColor] = useState("olive");
 
+  const colorData = [
+    { name: "Red", present: true },
+    { name: "Green", present: true },
+    { name: "Blue", present: true },
+    { name: "Yellow", present: true },
+    { name: "Purple", present: true },
+    { name: "Orange", present: true },
+    { name: "Pink", present: false },
+    { name: "Cyan", present: false },
+  ];
+
   return (
     <div className="w-full h-screen pt-20 duration-300" style={{ backgroundColor: color }}>
       <h1 className="text-center text-3xl text-white font-semibold mb-8">
         Welcome to the Color Switcher App!
       </h1>
 
-      <div className="flex justify-center flex-wrap gap-4 px-4">
+      <div className="flex justify-center flex-wrap gap-4 px-4 mb-8">
         {[
           { name: "Red", value: "red", bg: "bg-red-500", hover: "hover:bg-red-600" },
           { name: "Green", value: "green", bg: "bg-green-500", hover: "hover:bg-green-600" },
@@ -60,6 +71,45 @@ function Home() {
             {name}
           </button>
         ))}
+      </div>
+
+      {/* 🌈 Hover Description Button */}
+      <div className="flex justify-center mb-8">
+        <div className="relative group">
+          <button className="bg-indigo-600 hover:bg-pink-500 text-white font-semibold px-6 py-2 rounded transition duration-300">
+            Why Colors Matter
+          </button>
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 text-sm bg-white text-black p-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+            Colors shape mood, creativity, and expression. Let the palette inspire your next idea! 🌈
+          </div>
+        </div>
+      </div>
+
+      {/* 📊 Hover Table */}
+      <div className="flex justify-center mb-16">
+        <div className="relative group">
+          <button className="bg-white text-black px-4 py-2 rounded shadow hover:bg-gray-200">
+            Show Color Info
+          </button>
+          <div className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 w-64 bg-white border text-black rounded shadow-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-1">Color</th>
+                  <th className="text-left py-1">Available</th>
+                </tr>
+              </thead>
+              <tbody>
+                {colorData.map(({ name, present }) => (
+                  <tr key={name} className="border-b">
+                    <td className="py-1">{name}</td>
+                    <td className="py-1">{present ? "✅" : "❌"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <FloatingMessage />
